@@ -238,6 +238,33 @@ int zona_isZonaActiva(Zona zonasArray[],int len){
 	return retorno;
 }
 
+void zona_LocalidadMasAusentes(Zona zonasArray[], int len){
+
+	int auxCantidadDeAusentes;
+	auxCantidadDeAusentes = 0;
+	int cantidadDeAusentes;
+	cantidadDeAusentes = 0;
+	int zonaConMasAusentes;
+	zonaConMasAusentes = 0;
+	for(int i = 0; i < 4; i++){
+		for(int j = 0; j < len; j++){
+			if(zonasArray[j].estado == 1 && !(zonasArray[j].isEmpty)){
+				cantidadDeAusentes += zonasArray[j].resultadoCenso[2];
+			}
+		}
+		if(cantidadDeAusentes > auxCantidadDeAusentes){
+			zonaConMasAusentes = i;
+			auxCantidadDeAusentes = cantidadDeAusentes;
+		}
+		cantidadDeAusentes = 0;
+	}
+	printf("La localidad con mayor cantidad de ausentes fue: ");
+	Zona zona;
+	zona.localidad = zonaConMasAusentes;
+	zona_getLocalidad(zona);
+	printf("\n");
+
+}
 void zona_cargaForzada(Zona zonasArray[],int len){
 	for(int i = 0; i < 16; i++){
 		zonasArray[i].id = uuid(2);

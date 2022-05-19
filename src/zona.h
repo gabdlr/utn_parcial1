@@ -94,7 +94,10 @@ void zona_listarZonasSinAsignar(Zona zonasArray[], int len);
 /// @param len
 /// Inicializa el arreglo de Zonas con algunos valores por defecto
 void zona_cargaForzada(Zona zonasArray[],int len);
-
+/// @param zonasArray
+/// @param len
+/// devuelve la zona completada con mas ausentes
+void zona_LocalidadMasAusentes(Zona zonasArray[], int len);
 //Dev
 /// @param zonasArray
 /// Imprime todos los atributos de una zona

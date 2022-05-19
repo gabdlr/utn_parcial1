@@ -125,7 +125,17 @@ void censista_listarCensistasSinZonaAsignada(Censista censistasArray[], int len)
 /// @param len
 /// Carga el array de censistas con valores predefinidos
 void censista_cargaForzada(Censista censistasArray[],int len);
-
+/// @param censistasArray
+/// @param lenCensistas
+/// @param zonasArray
+/// @param lenZonas
+/// @return devuelve la cantidad de censistas activos con zona en estado pendiente
+int censista_cantidadCensistasActivosConZonaPendiente(Censista censistasArray[], int lenCensistas, Zona zonasArray[], int lenZonas);
+/// @param censistasArray
+/// @param len
+/// @param localidad
+/// Devuelve los censistas pertenecientesa a una localidad ordenados alfabeticamente por apellido y nombre
+void censista_ListarCensistasAlfabeticamenteSegunLocalidad(Censista censistasArray[], int len, int localidad);
 //Dev
 /// @param censista
 /// Imprime todos los atributos de un censista

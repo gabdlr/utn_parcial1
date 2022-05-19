@@ -20,8 +20,9 @@ void printMenuPrincipal(){
 			"1. Censistas\n"
 			"2. Zonas\n"
 			"3. Carga forzada\n"
-			"4. Salir\n");
-	if(utn_getInt(&opcion, "Opción: ", "Opción inválida", 1, 4, 3)){
+			"4. Listados\n"
+			"5. Salir\n");
+	if(utn_getInt(&opcion, "Opción: ", "Opción inválida", 1, 5, 3)){
 				fflush(stdin);
 	switch(opcion){
 		case 1:
@@ -159,6 +160,7 @@ void printMenuPrincipal(){
 					}
 				}
 			}while(opcion != 5);
+			opcion = 0;
 			break;
 		case 2:
 			do{
@@ -371,8 +373,50 @@ void printMenuPrincipal(){
 				}
 			}
 			break;
+		case 4:
+			do{
+			printf("Informes *Censo 2022* \n"
+					"******************************\n"
+					"Seleccione entre las siguientes opciones\n"
+					"1. Cantidad de censistas en estado activo con zona pendiente\n"
+					"2. Listar censistas alfabeticamente segun localidad\n"
+					"3. Localidad con mas casas ausentes\n"
+					"4. Volver\n");
+				if(utn_getInt(&opcion, "Opción: ", "Debe ingresar una opción válida", 1, 6, 3)){
+					switch(opcion){
+					case 1:
+						if(censista_isCensistaActivo(censistasArray, LEN_CENSISTAS)){
+							if(zona_isZonaActiva(zonasArray, LEN_ZONAS)){
+								printf("La cantidad de censistas activos con zona pendiente es de: %d\n",
+								censista_cantidadCensistasActivosConZonaPendiente(censistasArray, LEN_CENSISTAS, zonasArray, LEN_ZONAS));
+							}
+						}
+						break;
+					case 2:
+						if(censista_isCensistaActivo(censistasArray, LEN_CENSISTAS)){
+							if(zona_isZonaActiva(zonasArray, LEN_ZONAS)){
+							printf("Ingrese el digito correspondiente a la localidad de su interés: \n");
+							zona_printLocalidadesDisponibles();
+							int localidad;
+							if(utn_getInt(&localidad, "Opción: ", "Debe ingresar una localidad válida", 1, 4, 3)){
+								censista_ListarCensistasAlfabeticamenteSegunLocalidad(censistasArray, LEN_CENSISTAS, localidad);
+								}
+							}
+						}
+						break;
+					case 3:
+						if(censista_isCensistaActivo(censistasArray, LEN_CENSISTAS)){
+							if(zona_isZonaActiva(zonasArray, LEN_ZONAS)){
+								zona_LocalidadMasAusentes(zonasArray, LEN_ZONAS);
+							}
+						}
+						break;
+					}
+				}
+			}while(opcion != 4);
+			break;
 	}
 	}
-	}while(opcion != 4);
+	}while(opcion != 5);
 }
 

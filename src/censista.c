@@ -354,6 +354,55 @@ void censista_cargaForzada(Censista censistasArray[],int len){
 	}
 }
 
+int censista_cantidadCensistasActivosConZonaPendiente(Censista censistasArray[], int lenCensistas, Zona zonasArray[], int lenZonas){
+	int contador;
+	contador = 0;
+	if(censistasArray != NULL && lenCensistas > 0 && zonasArray != NULL && lenZonas > 0){
+		for(int i =0; i < lenCensistas; i++){
+			if(!(censistasArray[i].isEmpty) && censistasArray[i].estado == 1){
+				if(!zonasArray[censistasArray[i].zona].estado){
+					contador++;
+				}
+			}
+		}
+	}
+	return contador;
+}
+
+void censista_ListarCensistasAlfabeticamenteSegunLocalidad(Censista censistasArray[], int len, int localidad){
+	int isOrdered;
+	Censista censista1;
+	Censista censista2;
+	Censista auxCensista;
+	localidad = localidad - 1;
+	do{
+		isOrdered = 1;
+		len--;
+		for(int i = 0; i < len; i++){
+			censista1 = censistasArray[i];
+			censista2 = censistasArray[i+1];
+			if(stricmp(censista1.apellido,censista2.apellido) > 0){
+				auxCensista = censistasArray[i];
+				censistasArray[i] = censistasArray[i+1];
+				censistasArray[i+1] = auxCensista;
+				isOrdered = 0;
+			}else if(stricmp(censista1.apellido,censista2.apellido) == 0
+					&& censista1.nombre > censista2.nombre){
+				auxCensista = censistasArray[i];
+				censistasArray[i] = censistasArray[i+1];
+				censistasArray[i+1] = auxCensista;
+				isOrdered = 0;
+			}
+		}
+	}while(!isOrdered);
+	printf("  ID|Apellido|Nombre\n");
+	for(int i = 0; i < LEN_CENSISTAS; i++){
+		if(!(censistasArray[i].isEmpty) && censistasArray[i].zona == localidad){
+			printf("%d|%s|%s\n", censistasArray[i].id,censistasArray[i].apellido,censistasArray[i].nombre);
+		}
+	}
+}
+
 void censista_devPrintCensista(Censista censista){
 	printf("Id: %d\n", censista.id);
 	printf("Nombre: %s\n", censista.nombre);

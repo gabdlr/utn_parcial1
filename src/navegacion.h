@@ -11,5 +11,6 @@
 #ifndef NAVEGACION_H_
 #define NAVEGACION_H_
 
+//inicializa la aplicación y controla el flujo
 void printMenuPrincipal();
 #endif /* NAVEGACION_H_ */
